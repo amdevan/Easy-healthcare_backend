@@ -1,4 +1,7 @@
-storage
+.git
+.env
 vendor
 node_modules
-.git
+storage/*.key
+tests
+phpunit.xml
