@@ -17,10 +17,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl zip opcache
 
-# Enable Apache rewrite module
 RUN a2enmod rewrite
-# Ensure .htaccess is respected for Laravel front controller routing
-# Set AllowOverride All for the Apache document root so mod_rewrite rules apply
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf && \
     printf "<Directory %s>\n\tAllowOverride All\n</Directory>\n" "$APACHE_DOCUMENT_ROOT" > /etc/apache2/conf-available/override.conf && \
     a2enconf override
